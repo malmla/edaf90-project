@@ -11,5 +11,5 @@ This should work
 npm bootstrap react-bootstrap react react-dom react-scripts
 ```
 
-Time report done through https://forms.gle/6WqwcB5QayWox6Qw8.
-Results at https://docs.google.com/spreadsheets/d/1Ku0Buc6SBuxS5if3rjAR84lodWiAHW5GiwE0yiSYRoQ/edit?usp=sharing.
+Time report done through a [Google Form](https://forms.gle/6WqwcB5QayWox6Qw8).
+Results in [Google Sheets](https://docs.google.com/spreadsheets/d/1Ku0Buc6SBuxS5if3rjAR84lodWiAHW5GiwE0yiSYRoQ/edit?usp=sharing).
