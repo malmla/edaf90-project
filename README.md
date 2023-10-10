@@ -6,3 +6,5 @@ The project will utilise pre-built react gui-components from https://react-boots
 
 Time report done through a [Google Form](https://forms.gle/6WqwcB5QayWox6Qw8).
 Results in [Google Sheets](https://docs.google.com/spreadsheets/d/1Ku0Buc6SBuxS5if3rjAR84lodWiAHW5GiwE0yiSYRoQ/edit?usp=sharing).
+
+![alt text](/resources/plan.jpg)
