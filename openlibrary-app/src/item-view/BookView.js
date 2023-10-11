@@ -16,7 +16,7 @@ function BookView() {
                 </div>
 
                 <div className="row-cols-2 row">
-                    <div className="col-5 my-3">
+                    <div className="col-5 m-3">
                         {/* ersättes med fetch av cover */}
                         <img className="mh-auto" src="https://covers.openlibrary.org/b/id/9255566-L.jpg" alt="Cover for book with id 9255566"/> 
                     </div>
