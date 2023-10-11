@@ -1,14 +1,31 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import App from './App';
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import BookView from './item-view/BookView';
+
+const router = createBrowserRouter([
+  {
+    element: <App />,
+    index: true
+  },
+  {
+    element: <BookView />,
+    path: 'book-example'
+  },
+  {
+    path: "*",
+    element: <h2>Sidan du letar efter kan ej hittas.</h2>
+  }
+])
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <RouterProvider router={router}/>
   </React.StrictMode>
 );
 
