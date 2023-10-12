@@ -6,15 +6,27 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import App from './App';
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import BookView from './item-view/BookView';
+import SearchPage from './components/SearchPage';
+import ListPage from './components/ListPage';
 
 const router = createBrowserRouter([
   {
     element: <App />,
-    index: true
-  },
-  {
-    element: <BookView />,
-    path: 'book-example'
+    path: "/",
+    children: [
+      {
+        index: true,
+        element: <BookView />,
+      },
+      {
+        element: <ListPage />,
+        path: 'my-lists'
+      },
+      {
+        element: <SearchPage />,
+        path: 'search/:text',
+      },
+    ],
   },
   {
     path: "*",
