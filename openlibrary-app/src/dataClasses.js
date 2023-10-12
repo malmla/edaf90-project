@@ -21,7 +21,6 @@ export class Book{
     static async search(string) {
         let searchres = await safeFetchJson("https://openlibrary.org/search.json?q=" + string.replaceAll(" ", "+"));
         let res = [];
-        await safeFetchJson("http://openlibrary.org/works/OL27448W.json");
         await Promise.all(searchres.docs.map(async b => {
             let temp = null;
             try {
@@ -29,11 +28,9 @@ export class Book{
                     temp = await safeFetchJson("http://openlibrary.org" + b.key + ".json")
                 }
             }catch (e) {
-                console.log(e);
             }
             res.push(getbook(b, temp))
         }));
-        console.log(res);
         return "test";
     }
 }
