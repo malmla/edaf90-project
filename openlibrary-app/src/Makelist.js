@@ -5,17 +5,17 @@ function Makelist({list, position, title}){
             <table className={position} id={title}>
                 <thead>
                     <tr key={title}>
-                        <th style={{width: 147 + 'px'}}>Title</th>
-                        <th style={{width: 238 + 'px'}}>Author</th>
-                        <th >Year</th>
+                        {Object.keys(list[0]).map(obj => 
+                            <th>{obj}</th>
+                        )}
                     </tr>
                 </thead>
                 <tbody>
                     {list.map(obj=> 
-                        <tr key={Object.keys(obj)} >
-                            <td>{Object.keys(obj)}</td>
-                            <td>{obj[Object.keys(obj)]["Author"]}</td>
-                            <td>{obj[Object.keys(obj)]["Year"]}</td>
+                        <tr key={obj["Title"]} >
+                            {Object.values(obj).map(obj2 => 
+                                <td>{obj2}</td>
+                            )}
                 </tr>)}
                 </tbody>
             </table>

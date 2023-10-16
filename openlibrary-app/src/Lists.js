@@ -4,8 +4,9 @@ import Makelist from './Makelist.js';
 
 function Lists(){
     //temporary list of books to be displayed
-    const temp = [{"Dune": {"Author": "Frank Herbert", "Year": 1965}},
-    {"Metro 2033": {"Author": "Dmitry Glukhovsky", "Year": 2002}}
+    const temp = [
+        {"Title":"Dune", "Author": "Frank Herbert", "Year": 1965, "Publisher":"Chilton Books"},
+        {"Title":"Metro 2033", "Author": "Dmitry Glukhovsky", "Year": 2002, "Publisher":"Eksmo"}
     ];
     //assigning the list of books to different tables, they are currently the same for testing purposes
     const [favList, setFavList] = useState(temp);
