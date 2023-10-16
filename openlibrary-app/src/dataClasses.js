@@ -1,6 +1,6 @@
 
 
-export class Book{
+export class Book {
 
     /**
     * Returns a dummy book object
@@ -78,6 +78,27 @@ async function fetchBookEdition(OLID) {
     return book;
 }
 
+export class Author {
+
+}
+
+async function fetchAuthor(OLID) {
+    let author = new Author();
+
+    let remoteAuthor = await safeFetchJson('https://openlibrary.org/authors/' + OLID +'.json');
+
+    author.bio = remoteAuthor.bio ? remoteAuthor.bio : "No bio found";
+    author.birth_date = remoteAuthor.birth_date ? remoteAuthor.birth_date : "Field missing";
+    author.death_date = remoteAuthor.death_date ? remoteAuthor.death_date : "Field missing";
+    author.name = remoteAuthor.name ? remoteAuthor.name : "Name missing";
+    author.fuller_name = remoteAuthor.fuller_name ? remoteAuthor.fuller_name : "Field missing";
+    author.photos = remoteAuthor.photos ? remoteAuthor.photos : "Field missing";
+
+    console.log(author);
+
+    return author;
+}
+
 function safeFetchJson(url) {
     return fetch(url)
         .then(response => {
@@ -88,5 +109,4 @@ function safeFetchJson(url) {
         });
 }
 
-export default Book;
-export {fetchBookEdition};
+export {fetchBookEdition, fetchAuthor};

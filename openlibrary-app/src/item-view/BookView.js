@@ -12,8 +12,7 @@ Fate has placed the burden in the hands of Frodo Baggins, Bilbo's heir...and he 
 
 function BookView() {
     const book = useLoaderData();
-
-    console.log(book);
+    //console.log(book);
 
     return (
         <>
@@ -24,16 +23,16 @@ function BookView() {
 
                 <div className="row-cols-2 row">
                     <div className="col-5 m-3">
-                        {/* ersättes med fetch av cover */}
-                        <img className="mh-auto" src={"https://covers.openlibrary.org/b/id/" + book.covers[0] + "-L.jpg"} alt={"Cover for book with id " + book.covers[0]}/> 
+                        <img className="mh-auto" src={"https://covers.openlibrary.org/b/id/" + book.covers[0] + "-L.jpg"}
+                        alt={"Cover for book with id " + book.covers[0]}/> 
                     </div>
 
                     <div className="col px-3 border-start">
                         <div className="border-bottom m-1 pb-2">
                             {/* ersättes med hantering av klick */}
                             <ButtonGroup size="sm">
-                                <Button variant="secondary">Subscribe to updates</Button>
-                                <Button variant="secondary">Add to list</Button>
+                                <Button variant="secondary">Subscribe to updates{/* förmodligen en idé att göra som egen komponent å den utnyttjas i authorview samt bookview */}</Button>
+                                <Button variant="secondary">Add to list{/* förmodligen en idé att göra som egen komponent å den utnyttjas i authorview samt bookview */}</Button>
                             </ButtonGroup>
                         </div>
 
@@ -57,7 +56,6 @@ function BookView() {
 
                         <div className="">
                             <h4>Description</h4>
-                            {/* ersättes med fetch av beskrivning */}
                             <p>
                                 {book.description}
                             </p>

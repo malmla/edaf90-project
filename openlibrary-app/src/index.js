@@ -6,9 +6,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import App from './App';
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import BookView from './item-view/BookView';
+import AuthorView from './item-view/AuthorView';
 import SearchPage from './components/SearchPage';
 import ListPage from './components/ListPage';
-import { fetchBookEdition } from './dataClasses';
+import { fetchBookEdition, fetchAuthor } from './dataClasses';
 
 const router = createBrowserRouter([
   {
@@ -21,6 +22,13 @@ const router = createBrowserRouter([
         path: 'book/:olid',
         loader: ({ params }) => {
           return fetchBookEdition(params.olid);
+        }
+      },
+      {
+        element: <AuthorView />,
+        path: 'authors/:olid',
+        loader: ({ params }) => {
+          return fetchAuthor(params.olid);
         }
       },
       {
