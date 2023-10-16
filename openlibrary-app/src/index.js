@@ -8,6 +8,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import BookView from './item-view/BookView';
 import SearchPage from './components/SearchPage';
 import ListPage from './components/ListPage';
+import { fetchBookEdition } from './dataClasses';
 
 const router = createBrowserRouter([
   {
@@ -17,6 +18,10 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <BookView />,
+        path: 'book/:olid',
+        loader: ({ params }) => {
+          return fetchBookEdition(params.olid);
+        }
       },
       {
         element: <ListPage />,

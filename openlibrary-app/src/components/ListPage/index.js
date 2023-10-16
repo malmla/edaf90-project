@@ -1,7 +1,9 @@
+import Lists from '../../Lists.js'
+
 function ListPage() {
   return (
     <div>
-      List page
+      <Lists />
     </div>
   );
 }
