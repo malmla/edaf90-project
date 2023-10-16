@@ -66,12 +66,14 @@ async function fetchBookEdition(OLID) {
 
     book.description = work.description ? work.description : "No description found"; //behöver ta hänsyn till olika format w.desc... w.desc..n.value
 
+    if (work.description.value) {
+        book.description = work.description.value
+    }
+
     let author = await safeFetchJson('https://openlibrary.org' + work.authors[0].author.key + '.json');
 
     book.author_name = author.name ? author.name : "Name not found";
     book.author_key = author.key ? author.key : "Link not found";
-
-    console.log(book);
 
     return book;
 }
