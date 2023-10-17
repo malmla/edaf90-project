@@ -77,14 +77,17 @@ async function fetchBookEdition(OLID) {
 
     book.description = work.description ? work.description : "No description found"; //behöver ta hänsyn till olika format w.desc... w.desc..n.value
 
-    if (work.description.value) {
+    if (work.description && work.description.value) {
         book.description = work.description.value
     }
 
-    let author = await safeFetchJson('https://openlibrary.org' + work.authors[0].author.key + '.json');
-
-    book.author_name = author.name ? author.name : "Name not found";
-    book.author_key = author.key ? author.key : "Link not found";
+    book.authors = [];
+    let authors = [];
+    work.authors.map(entry => {
+        authors.push(safeFetchJson('https://openlibrary.org' + entry.author.key + '.json'));
+    })
+    await Promise.all(authors)
+    .then(e => e.map(author => {book.authors.push(author)}));
 
     return book;
 }
@@ -105,7 +108,7 @@ async function fetchAuthor(OLID) {
     author.fuller_name = remoteAuthor.fuller_name ? remoteAuthor.fuller_name : "Field missing";
     author.photos = remoteAuthor.photos ? remoteAuthor.photos : "Field missing";
 
-    console.log(author);
+    //console.log(author);
 
     return author;
 }

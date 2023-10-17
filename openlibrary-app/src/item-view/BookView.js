@@ -6,7 +6,7 @@ import { useLoaderData } from "react-router-dom";
 
 function BookView() {
     const book = useLoaderData();
-
+    //console.log(book);
     return (
         <>
             <div className="">
@@ -31,17 +31,18 @@ function BookView() {
 
                         <div className="border-bottom m-1 pb-2">
                             <h4>Author(s):</h4>
-                            <Button href={book.author_key} variant='link'>{book.author_name}</Button>
+                            {
+                                book.authors.map( author => {
+                                    return( <Button href={author.key} variant='link'>{author.name}</Button>)
+                                })
+                            }
+                            
                         </div>
 
                         <div className="border-bottom m-1 pb-2">
                             <h4>Edition details</h4>
-                            <p>
-                                Publish date: {book.publish_date}
-                            </p>
-                            <p>
-                                Publisher: {book.publishers[0]}
-                            </p>
+                            <b>Publish date:</b> {book.publish_date} <br/>
+                            <b>Publisher:</b> {book.publishers[0]} <br/>
                             {/* länk till works/olid */}
                             <Button variant="secondary" size="sm">See other editions</Button>
                             
