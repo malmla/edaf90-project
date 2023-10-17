@@ -3,6 +3,7 @@ import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import Carousel from 'react-bootstrap/Carousel';
 import CarouselItem from "react-bootstrap/esm/CarouselItem";
+import Image from 'react-bootstrap/Image';
 
 
 function AuthorView () {
@@ -33,10 +34,11 @@ function AuthorView () {
                             })
                             .map(photo_id => {
                                 return ( 
-                                <CarouselItem className="m-auto" key={photo_id}>
-                                    <img
+                                <CarouselItem key={photo_id}>
+                                    <Image
                                         src={"https://covers.openlibrary.org/a/id/" + photo_id + "-L.jpg"}
                                         alt={"Photo with photo_id " + photo_id + "of " + author.name}
+                                        fluid
                                     />
                                 </CarouselItem>
                                 )
