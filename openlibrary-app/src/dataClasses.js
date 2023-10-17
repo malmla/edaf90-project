@@ -41,8 +41,10 @@ export class Book {
 
 function getbook(b, work) {
     let book = new Book();
+    book.key = b.key ? b.key : "No key";
     book.title = b.title ? b.title : "Unknown Title";
     book.authors = b.author_name ? b.author_name : ["Unknown Author"];
+    book.authors_key = b.author_key ? b.author_key : ["Unknown Author"];
     book.publish_year = b.first_publish_year ? b.first_publish_year : "Unknown publish year";
     book.publisher = "TODO"
     book.description = work && work.description ? work.description.value : "No description found";

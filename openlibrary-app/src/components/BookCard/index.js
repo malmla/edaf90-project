@@ -24,7 +24,7 @@ function BookCard(props) {
               <a href={url}>{book.title}</a>
             </Card.Title>
             <Card.Text className="text-left">
-              <b>Author:</b> {book.authors}<br />
+              <b>Author:</b><Button href={'../authors/' + book.authors_key} variant='link'>{book.authors}</Button><br />
               <b>Published:</b> {book.publish_year}<br />
               <br />
             </Card.Text>

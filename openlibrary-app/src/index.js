@@ -19,7 +19,7 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <BookView />,
-        path: 'book/:olid',
+        path: 'books/:olid',
         loader: ({ params }) => {
           return fetchBookEdition(params.olid);
         }
