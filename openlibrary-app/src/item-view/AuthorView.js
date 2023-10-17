@@ -3,7 +3,6 @@ import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import Carousel from 'react-bootstrap/Carousel';
 import CarouselItem from "react-bootstrap/esm/CarouselItem";
-import CarouselCaption from "react-bootstrap/esm/CarouselCaption";
 
 
 function AuthorView () {
@@ -11,19 +10,39 @@ function AuthorView () {
     return (
         <div>
             <div>
-                {author.name}
+                <h2>{author.name}</h2>
             </div>
             <div className="row-cols-2 row">
                 <div className="col border">
-                    {author.bio}
+                    <h3>Bio, if available</h3>{author.bio}
                 </div>
                 <div className="col border row-cols-2 row">
                     <div className="col border">
-                        detaljer {/* behöver ta hänsyn till vilka data som finns */}
+                        <h3>Details, if available</h3>
+                        {author.birth_date === "Field missing" ? <></> : <><b>Born:</b> {author.birth_date} <br/></>}
+                        {author.death_date === "Field missing" ? <></> : <><b>Dead:</b> {author.death_date} <br/></>}
+                        {author.fuller_name === "Field missing" ? <></> : <><b>Full name:</b> {author.fuller_name} <br/></>}
                     </div>
                     <div className="col border">
-                        {/* skapa efter hur många bilder som finns */}
-                        <AuthorCarousel />
+                        {/* kanske loader ist? vill egentligen ha fast storlek på carousel:n */}
+                        <Carousel className="bg-dark">
+                        {
+                            author.photos
+                            .filter(photo_id => {
+                                return photo_id !== -1;
+                            })
+                            .map(photo_id => {
+                                return ( 
+                                <CarouselItem className="m-auto" key={photo_id}>
+                                    <img
+                                        src={"https://covers.openlibrary.org/a/id/" + photo_id + "-L.jpg"}
+                                        alt={"Photo with photo_id " + photo_id + "of " + author.name}
+                                    />
+                                </CarouselItem>
+                                )
+                            })
+                        }
+                        </Carousel>
                     </div>
                     <div className="row border m-auto">
                         <ButtonGroup size="sm">
@@ -38,28 +57,22 @@ function AuthorView () {
     )
 }
 
-function AuthorCarousel () {
+function AuthorCarousel (props) {
     return (
         <>
             <Carousel className="bg-dark">
             <CarouselItem className="m-auto">
                     <img
                         src="https://covers.openlibrary.org/a/id/6433526-L.jpg "
-                        alt="Image of author"
+                        alt=""
                     />
-
-                    <CarouselCaption>
-
-                    </CarouselCaption>
-                </CarouselItem><CarouselItem className="m-auto">
+                
+                </CarouselItem>
+                <CarouselItem className="m-auto">
                     <img
                         src="https://covers.openlibrary.org/a/id/6433524-L.jpg "
-                        alt="Image of author"
+                        alt=""
                     />
-
-                    <CarouselCaption>
-
-                    </CarouselCaption>
                 </CarouselItem>
             </Carousel>
         </>
