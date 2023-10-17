@@ -12,9 +12,16 @@ function AuthorView () {
         <div>
             <div className="my-2 border border-5 border-top-0 border-start-0 border-end-0 border-bottom border-primary">
                 <h2>{author.name}</h2>
+                <div className="row m-auto py-3 justify-content-around">
+                    <ButtonGroup size="sm">
+                        <Button variant="secondary">Subscribe to updates {/* förmodligen en idé att göra som egen komponent å den utnyttjas i authorview samt bookview */}</Button>
+                        <Button variant="secondary">Tagged works {/* sökning på author-olid */}</Button>
+                        <Button variant="secondary">Add to list {/* förmodligen en idé att göra som egen komponent å den utnyttjas i authorview samt bookview */}</Button>
+                    </ButtonGroup>
+                </div>
             </div>
             <div className="row-cols-2 row">
-                <div className="col mx-auto">
+                <div className="col col-5 mx-auto">
                     <h3>Bio, if available</h3>
                     {author.bio}
                 </div>
@@ -47,13 +54,7 @@ function AuthorView () {
                         }
                         </Carousel>
                     </div>
-                    <div className="row m-auto py-3">
-                        <ButtonGroup size="sm">
-                            <Button variant="secondary">Subscribe to updates {/* förmodligen en idé att göra som egen komponent å den utnyttjas i authorview samt bookview */}</Button>
-                            <Button variant="secondary">Tagged works {/* sökning på author-olid */}</Button>
-                            <Button variant="secondary">Add to list {/* förmodligen en idé att göra som egen komponent å den utnyttjas i authorview samt bookview */}</Button>
-                        </ButtonGroup>
-                    </div>
+                    
                 </div>
             </div>
         </div>
