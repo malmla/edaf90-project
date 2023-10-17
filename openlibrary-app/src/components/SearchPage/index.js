@@ -18,7 +18,7 @@ function SearchPage() {
       list = list.filter(b => b.coverLink !== "No cover found"); //for demo purposes
       setFetchingData(false);
       setSearchResult(list);
-      console.log(list);
+      //console.log(list);
     };
 
     if (text) fetchResult();

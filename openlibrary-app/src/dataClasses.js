@@ -58,12 +58,10 @@ function getbook(b) {
     book.coverLink = b.cover_i ? "https://covers.openlibrary.org/b/id/" + b.cover_i + "-L.jpg" : "No cover found";
     book.id = b.cover_edition_key;
     book.editions = b.edition_key;
+    
     return book;
 }
 
-/*
-    hämtar ENDAST första författaren
-*/
 async function fetchBookEdition(OLID) {
     let book = new Book();
     let edition = await safeFetchJson('https://openlibrary.org/books/' + OLID + '.json');
@@ -84,10 +82,10 @@ async function fetchBookEdition(OLID) {
     book.authors = [];
     let authors = [];
     work.authors.map(entry => {
-        authors.push(safeFetchJson('https://openlibrary.org' + entry.author.key + '.json'));
+        return authors.push(safeFetchJson('https://openlibrary.org' + entry.author.key + '.json'));
     })
     await Promise.all(authors)
-    .then(e => e.map(author => {book.authors.push(author)}));
+    .then(e => e.map(author => {return book.authors.push(author)}));
 
     return book;
 }
