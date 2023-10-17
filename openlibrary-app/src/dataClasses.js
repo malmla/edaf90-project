@@ -35,7 +35,7 @@ export class Book {
             }
             res.push(getbook(b, temp))
         }));
-        return "test";
+        return res;
     }
 }
 

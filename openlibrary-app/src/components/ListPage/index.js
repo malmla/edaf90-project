@@ -1,4 +1,4 @@
-import Lists from '../../Lists.js'
+import Lists from "../../Lists";
 
 function ListPage() {
   return (

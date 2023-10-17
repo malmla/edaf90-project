@@ -11,7 +11,6 @@ function SearchBar() {
 
   const onSearch = (e) => {
     e.preventDefault();
-    console.log(text)
     navigate(`/search/${encodeURIComponent(text)}`);
   }
   return (

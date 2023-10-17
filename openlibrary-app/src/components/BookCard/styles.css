@@ -1,0 +1,9 @@
+.book-cover {
+  height: 100%;
+  width: 200px;
+}
+
+.book-card {
+  width: auto;
+  text-align: left;
+}
