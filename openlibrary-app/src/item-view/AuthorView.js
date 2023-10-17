@@ -13,17 +13,17 @@ function AuthorView () {
                 <h2>{author.name}</h2>
             </div>
             <div className="row-cols-2 row">
-                <div className="col border">
+                <div className="col border mx-auto">
                     <h3>Bio, if available</h3>{author.bio}
                 </div>
-                <div className="col border row-cols-2 row">
-                    <div className="col border">
+                <div className="col border mx-auto row-cols-2 row">
+                    <div className="col">
                         <h3>Details, if available</h3>
                         {author.birth_date === "Field missing" ? <></> : <><b>Born:</b> {author.birth_date} <br/></>}
                         {author.death_date === "Field missing" ? <></> : <><b>Dead:</b> {author.death_date} <br/></>}
                         {author.fuller_name === "Field missing" ? <></> : <><b>Full name:</b> {author.fuller_name} <br/></>}
                     </div>
-                    <div className="col border">
+                    <div className="col">
                         {/* kanske loader ist? vill egentligen ha fast storlek på carousel:n */}
                         <Carousel className="bg-dark">
                         {
@@ -57,26 +57,5 @@ function AuthorView () {
     )
 }
 
-function AuthorCarousel (props) {
-    return (
-        <>
-            <Carousel className="bg-dark">
-            <CarouselItem className="m-auto">
-                    <img
-                        src="https://covers.openlibrary.org/a/id/6433526-L.jpg "
-                        alt=""
-                    />
-                
-                </CarouselItem>
-                <CarouselItem className="m-auto">
-                    <img
-                        src="https://covers.openlibrary.org/a/id/6433524-L.jpg "
-                        alt=""
-                    />
-                </CarouselItem>
-            </Carousel>
-        </>
-    );
-}
 
 export default AuthorView;
