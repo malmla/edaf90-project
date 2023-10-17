@@ -37,6 +37,25 @@ export class Book {
         }));
         return res;
     }
+
+    /**
+     *
+     * Fetches information about all editions and puts it in the editions property
+     */
+    async getEditions() {
+        this.fetched_editions = [];
+        await Promise.all(this.editions.map(async e => {
+            let b = await safeFetchJson("http://openlibrary.org/books/" + e + ".json");
+            let book = new Book();
+            book.title = b.title ? b.title : "Unknown Title";
+            book.publish_year = b.publish_date ? b.publish_date : "Unknown publish year";
+            book.publisher = b.publishers ? b.publishers : "No publisher found";
+            book.coverLink = b.covers ? b.covers[0] : null;
+            book.id = e;
+            book.editions = b.edition_key;
+            this.fetched_editions.push(book);
+        }));
+    }
 }
 
 function getbook(b, work) {
@@ -49,6 +68,8 @@ function getbook(b, work) {
     book.publisher = "TODO"
     book.description = work && work.description ? work.description.value : "No description found";
     book.coverLink = b.cover_i ? "https://covers.openlibrary.org/b/id/" + b.cover_i + "-L.jpg" : "No cover found";
+    book.id = b.cover_edition_key;
+    book.editions = b.edition_key;
     return book;
 }
 
