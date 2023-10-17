@@ -21,7 +21,7 @@ function BookCard(props) {
             <Card.Title>
               <Link to={"/books/" + book.id}>{book.title}</Link>
             </Card.Title>
-            <Card.Text className="text-left">
+            <Card.Text className="text-left"> {/* gör dynamiskt antal länkar */}
               <b>Author:</b><Button href={'../authors/' + book.authors_key} variant='link'>{book.authors}</Button><br />
               <b>Published:</b> {book.publish_year}<br />
               <br />
