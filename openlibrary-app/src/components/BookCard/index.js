@@ -1,12 +1,10 @@
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import './styles.css';
-import { useNavigate } from 'react-router-dom';
 
 
 function BookCard(props) {
   const { book } = props;
-  const url = 'https://example.com';
 
   const onClick = () => {
     console.log("Clicked book: ", book.title);
@@ -21,7 +19,7 @@ function BookCard(props) {
         <Card.Body className="d-flex flex-column justify-content-between">
           <div>
             <Card.Title>
-              <a href={url}>{book.title}</a>
+              <Link to={"/books/" + book.id}>{book.title}</Link>
             </Card.Title>
             <Card.Text className="text-left">
               <b>Author:</b><Button href={'../authors/' + book.authors_key} variant='link'>{book.authors}</Button><br />
