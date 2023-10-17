@@ -10,14 +10,15 @@ function AuthorView () {
     const author = useLoaderData();
     return (
         <div>
-            <div>
+            <div className="my-2 border border-5 border-top-0 border-start-0 border-end-0 border-bottom border-primary">
                 <h2>{author.name}</h2>
             </div>
             <div className="row-cols-2 row">
-                <div className="col border mx-auto">
-                    <h3>Bio, if available</h3>{author.bio}
+                <div className="col mx-auto">
+                    <h3>Bio, if available</h3>
+                    {author.bio}
                 </div>
-                <div className="col border mx-auto row-cols-2 row">
+                <div className="col border-start mx-auto row-cols-2 row px-3">
                     <div className="col">
                         <h3>Details, if available</h3>
                         {author.birth_date === "Field missing" ? <></> : <><b>Born:</b> {author.birth_date} <br/></>}
@@ -46,7 +47,7 @@ function AuthorView () {
                         }
                         </Carousel>
                     </div>
-                    <div className="row border m-auto">
+                    <div className="row m-auto py-3">
                         <ButtonGroup size="sm">
                             <Button variant="secondary">Subscribe to updates {/* förmodligen en idé att göra som egen komponent å den utnyttjas i authorview samt bookview */}</Button>
                             <Button variant="secondary">Tagged works {/* sökning på author-olid */}</Button>
