@@ -25,48 +25,36 @@ export class Book {
     static async search(string) {
         let searchres = await safeFetchJson("https://openlibrary.org/search.json?q=" + string.replaceAll(" ", "+"));
         let res = [];
-        await Promise.all(searchres.docs.map(async b => {
-            let temp = null;
-            try {
-                if(b.key) {
-                    temp = await safeFetchJson("http://openlibrary.org" + b.key + ".json")
-                }
-            }catch (e) {
-            }
-            res.push(getbook(b, temp))
+        await Promise.all(searchres.docs.map(b => {
+            res.push(getbook(b))
         }));
         return res;
     }
-
-    /**
-     *
-     * Fetches information about all editions and puts it in the editions property
-     */
-    async getEditions() {
-        this.fetched_editions = [];
-        await Promise.all(this.editions.map(async e => {
-            let b = await safeFetchJson("http://openlibrary.org/books/" + e + ".json");
-            let book = new Book();
-            book.title = b.title ? b.title : "Unknown Title";
-            book.publish_year = b.publish_date ? b.publish_date : "Unknown publish year";
-            book.publisher = b.publishers ? b.publishers : "No publisher found";
-            book.coverLink = b.covers ? b.covers[0] : null;
-            book.id = e;
-            book.editions = b.edition_key;
-            this.fetched_editions.push(book);
-        }));
-    }
 }
 
-function getbook(b, work) {
+async function fetchEditions(editions) {
+    let fetched = [];
+    await Promise.all(editions.map(async e => {
+        let b = await safeFetchJson("http://openlibrary.org/books/" + e + ".json");
+        let book = new Book();
+        book.title = b.title ? b.title : "Unknown Title";
+        book.publish_year = b.publish_date ? b.publish_date : "Unknown publish year";
+        book.publisher = b.publishers ? b.publishers : "No publisher found";
+        book.coverLink = b.covers ? b.covers[0] : null;
+        book.id = e;
+        book.editions = b.edition_key;
+        fetched.push(book);
+    }));
+    return fetched;
+}
+
+function getbook(b) {
     let book = new Book();
     book.key = b.key ? b.key : "No key";
     book.title = b.title ? b.title : "Unknown Title";
     book.authors = b.author_name ? b.author_name : ["Unknown Author"];
     book.authors_key = b.author_key ? b.author_key : ["Unknown Author"];
     book.publish_year = b.first_publish_year ? b.first_publish_year : "Unknown publish year";
-    book.publisher = "TODO"
-    book.description = work && work.description ? work.description.value : "No description found";
     book.coverLink = b.cover_i ? "https://covers.openlibrary.org/b/id/" + b.cover_i + "-L.jpg" : "No cover found";
     book.id = b.cover_edition_key;
     book.editions = b.edition_key;
@@ -132,4 +120,4 @@ function safeFetchJson(url) {
         });
 }
 
-export {fetchBookEdition, fetchAuthor};
+export {fetchBookEdition, fetchAuthor, fetchEditions};
