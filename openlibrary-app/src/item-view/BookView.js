@@ -33,7 +33,7 @@ function BookView() {
                             <h4>Author(s):</h4>
                             {
                                 book.authors.map( author => {
-                                    return( <Button href={author.key} variant='link'>{author.name}</Button>)
+                                    return( <Button href={author.key} key={author.key} variant='link'>{author.name}</Button>)
                                 })
                             }
                             

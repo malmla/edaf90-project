@@ -55,7 +55,7 @@ function AuthorView () {
                                     {
                                         author.works.map(work => {
                                             return (
-                                                <ListGroup.Item action href={work.key}>
+                                                <ListGroup.Item key={"link-to-"+ work.key} action href={work.key}>
                                                     <Stack direction="horizontal">
                                                         <div>
                                                             <Image src={getCoverThumb(work.covers)} />
