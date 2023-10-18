@@ -31,11 +31,10 @@ function AuthorView () {
             <div className="my-2 border border-5 border-top-0 border-start-0 border-end-0 border-bottom border-primary">
                 <h2>{author.name}</h2>
             </div>
-            <div className="row m-auto py-3 justify-content-around">
+            <div className="row m-auto py-3 justify-content-around btn-row">
                 <ButtonGroup size="sm">
                     <Button variant="secondary">Subscribe to updates {/* förmodligen en idé att göra som egen komponent å den utnyttjas i authorview samt bookview */}</Button>
                     <Button variant="secondary">Add to list {/* förmodligen en idé att göra som egen komponent å den utnyttjas i authorview samt bookview */}</Button>
-                    <Button variant="secondary">Tagged works {/* finns authors/olid/works.json att utnyttja */}</Button>
                 </ButtonGroup>
             </div>
             <div className="row-cols-2 row">
