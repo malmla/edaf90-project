@@ -7,15 +7,27 @@ import Image from 'react-bootstrap/Image';
 import Accordion from 'react-bootstrap/Accordion';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Stack from 'react-bootstrap/Stack';
+import Spinner from "react-bootstrap/esm/Spinner";
+import { useNavigation } from "react-router-dom";
+
 //import Pagination from 'react-bootstrap/Pagination';
 //import { useState } from "react";
 import './styles.css'
 
 function AuthorView () {
     const author = useLoaderData();
+    const navigation = useNavigation();
     //const [worksPage, setWorksPage] = useState(1);
     return (
         <div>
+            {
+                navigation.state === "loading" ?
+                <Spinner animation="border" role="status" className="mt-1">
+                    <span className="visually-hidden">Loading...</span>
+                </Spinner>
+                :
+                <></>
+            }
             <div className="my-2 border border-5 border-top-0 border-start-0 border-end-0 border-bottom border-primary">
                 <h2>{author.name}</h2>
             </div>
@@ -47,7 +59,6 @@ function AuthorView () {
                                                 <ListGroup.Item action href={work.key}>
                                                     <Stack direction="horizontal">
                                                         <div>
-                                                            {console.log(getCoverThumb(work.covers))}
                                                             <Image src={getCoverThumb(work.covers)} />
                                                         </div>
                                                         <div className="ms-auto">{work.title}</div>
@@ -71,6 +82,7 @@ function AuthorView () {
                     </div>
                     <div className="col">
                         {/* kanske loader ist? vill egentligen ha fast storlek på carousel:n */}
+                        {author.photos === "Field missing" ? <div className="author-photo-frame">No photos for this author</div> : 
                         <Carousel className="bg-dark author-photo-frame">
                         {
                             author.photos
@@ -90,6 +102,7 @@ function AuthorView () {
                             })
                         }
                         </Carousel>
+                        }
                     </div>
                     
                 </div>
