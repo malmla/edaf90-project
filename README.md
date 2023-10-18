@@ -6,9 +6,9 @@ The project will utilise pre-built react gui-components from https://react-boots
 
 TODO:
 - landing page: se items man prenumererar på som har uppdateringar, visa de listor som finns
-- authorview: lista verk
 - subscribe-knapp-komponent och add-to-list-komponent? samma behaviour i authorview som i bookview? 
     - lägg till i lista, ta bort från lista, prenumerera: det här kan förmodligen vara context-reducer
+- worksview (/works/:olid)
 - sökning: (söka efter författare, lägre prio)
 - progressive web app (lägre prio):
 - localstorage? listor och prenumerationslistan
