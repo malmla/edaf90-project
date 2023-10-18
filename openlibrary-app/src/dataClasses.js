@@ -121,7 +121,7 @@ async function fetchAuthorWorks(url) {
 
     let works = [];
     worksPromise.entries.map(entry => {
-        works.push({"title": entry.title, "key": entry.key, "covers": entry.covers ? entry.covers : "No cover"});
+        return works.push({"title": entry.title, "key": entry.key, "covers": entry.covers ? entry.covers : "No cover"});
     })
     return works;
 }
