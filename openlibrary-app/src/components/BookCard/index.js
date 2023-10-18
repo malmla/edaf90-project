@@ -1,12 +1,14 @@
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import './styles.css';
 
 
 function BookCard(props) {
   const { book } = props;
   const authors = [];
+  const navigate = useNavigate();
   for (let index = 0; index < book.authors.length; index++) {
     const author_name = book.authors[index];
     const author_key = book.authors_key[index];
@@ -14,7 +16,7 @@ function BookCard(props) {
   }
 
   const onClick = () => {
-    console.log("Clicked book: ", book.title);
+    navigate("/books/" + book.id);
   }
 
   return (
