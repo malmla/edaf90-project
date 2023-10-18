@@ -1,0 +1,15 @@
+.works-results {
+    overflow: scroll;
+    height: 40vh;
+}
+
+.author-photo-frame {
+    height: 50vh;
+}
+
+.author-photo {
+    height: 45vh;
+    object-fit: cover;
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+}

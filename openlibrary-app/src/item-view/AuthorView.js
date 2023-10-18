@@ -4,10 +4,16 @@ import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import Carousel from 'react-bootstrap/Carousel';
 import CarouselItem from "react-bootstrap/esm/CarouselItem";
 import Image from 'react-bootstrap/Image';
-
+import Accordion from 'react-bootstrap/Accordion';
+import ListGroup from 'react-bootstrap/ListGroup';
+import Stack from 'react-bootstrap/Stack';
+//import Pagination from 'react-bootstrap/Pagination';
+//import { useState } from "react";
+import './styles.css'
 
 function AuthorView () {
     const author = useLoaderData();
+    //const [worksPage, setWorksPage] = useState(1);
     return (
         <div>
             <div className="my-2 border border-5 border-top-0 border-start-0 border-end-0 border-bottom border-primary">
@@ -16,14 +22,45 @@ function AuthorView () {
             <div className="row m-auto py-3 justify-content-around">
                 <ButtonGroup size="sm">
                     <Button variant="secondary">Subscribe to updates {/* förmodligen en idé att göra som egen komponent å den utnyttjas i authorview samt bookview */}</Button>
-                    <Button variant="secondary">Tagged works {/* sökning på author-olid */}</Button>
                     <Button variant="secondary">Add to list {/* förmodligen en idé att göra som egen komponent å den utnyttjas i authorview samt bookview */}</Button>
+                    <Button variant="secondary">Tagged works {/* finns authors/olid/works.json att utnyttja */}</Button>
                 </ButtonGroup>
             </div>
             <div className="row-cols-2 row">
                 <div className="col col-5 mx-auto">
-                    <h3>Bio, if available</h3>
-                    {author.bio}
+                    <Accordion defaultActiveKey="0">
+                        <Accordion.Item eventKey="0">
+                            <Accordion.Header><h3>Bio, if available</h3></Accordion.Header>
+                            <Accordion.Body>
+                                {author.bio}
+                            </Accordion.Body>
+                        </Accordion.Item>
+
+                        <Accordion.Item eventKey="1">
+                            <Accordion.Header><h3>Works</h3></Accordion.Header>
+                            <Accordion.Body>
+                                <div className="works-results">
+                                    <ListGroup>
+                                    {
+                                        author.works.map(work => {
+                                            return (
+                                                <ListGroup.Item action href={work.key}>
+                                                    <Stack direction="horizontal">
+                                                        <div>
+                                                            {console.log(getCoverThumb(work.covers))}
+                                                            <Image src={getCoverThumb(work.covers)} />
+                                                        </div>
+                                                        <div className="ms-auto">{work.title}</div>
+                                                    </Stack>
+                                                </ListGroup.Item>)
+                                        })
+                                    }
+                                    </ListGroup>
+                                </div>
+                            </Accordion.Body>
+                        </Accordion.Item>
+                    </Accordion>
+
                 </div>
                 <div className="col border-start mx-auto row-cols-2 row px-3">
                     <div className="col">
@@ -34,7 +71,7 @@ function AuthorView () {
                     </div>
                     <div className="col">
                         {/* kanske loader ist? vill egentligen ha fast storlek på carousel:n */}
-                        <Carousel className="bg-dark">
+                        <Carousel className="bg-dark author-photo-frame">
                         {
                             author.photos
                             .filter(photo_id => {
@@ -43,7 +80,7 @@ function AuthorView () {
                             .map(photo_id => {
                                 return ( 
                                 <CarouselItem key={photo_id}>
-                                    <Image
+                                    <Image className="author-photo"
                                         src={"https://covers.openlibrary.org/a/id/" + photo_id + "-L.jpg"}
                                         alt={"Photo with photo_id " + photo_id + "of " + author.name}
                                         fluid
@@ -61,5 +98,20 @@ function AuthorView () {
     )
 }
 
+function getCoverThumb (covers) {
+    if(covers === "No cover") {
+        return "/no-cover.png";
+    }
+    
+    covers = covers.filter(cover => {
+        return cover !== -1;
+    })
+
+    if(covers.length < 1) {
+        return "/no-cover.png";
+    }
+
+    return ("https://covers.openlibrary.org/b/id/" + covers[0] + "-S.jpg");
+}
 
 export default AuthorView;

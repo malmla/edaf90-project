@@ -106,9 +106,24 @@ async function fetchAuthor(OLID) {
     author.fuller_name = remoteAuthor.fuller_name ? remoteAuthor.fuller_name : "Field missing";
     author.photos = remoteAuthor.photos ? remoteAuthor.photos : "Field missing";
 
-    //console.log(author);
+    let authorWorks = await fetchAuthorWorks("https://openlibrary.org/authors/" + OLID + "/works.json");
+    author.works = authorWorks;
 
     return author;
+}
+
+/** 
+* Hämtar alla works av en författare
+*/
+async function fetchAuthorWorks(url) {
+    let temp = await safeFetchJson(url);
+    let worksPromise = await safeFetchJson(url + "?limit=" + temp.size);
+
+    let works = [];
+    worksPromise.entries.map(entry => {
+        works.push({"title": entry.title, "key": entry.key, "covers": entry.covers ? entry.covers : "No cover"});
+    })
+    return works;
 }
 
 function safeFetchJson(url) {

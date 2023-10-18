@@ -7,6 +7,9 @@ function App() {
     <div className="App">
       <NavigationBar />
       <Outlet />
+      <footer className='my-5'>
+        UIcons by <a href="https://www.flaticon.com/uicons">Flaticon</a>
+      </footer>
     </div>
   );
 }
