@@ -1,9 +1,9 @@
-import Lists from "../../Lists";
+import Lists from "./Lists";
 
 function ListPage() {
   return (
     <div>
-      <Lists />
+      <Lists/>
     </div>
   );
 }

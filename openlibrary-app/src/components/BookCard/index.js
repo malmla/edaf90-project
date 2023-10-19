@@ -2,11 +2,17 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import './styles.css';
 import { useNavigate } from 'react-router-dom';
+import { useContext } from 'react';
+import { ListContext, ListDispatchContext } from '../../listContexts.js';
+import { handleAdd } from '../../listFunctions';
 
 
 function BookCard(props) {
   const { book } = props;
   const url = 'https://example.com';
+
+  const lists = useContext(ListContext);
+  const dispatches = useContext(ListDispatchContext);
 
   const onClick = () => {
     console.log("Clicked book: ", book.title);
@@ -29,7 +35,9 @@ function BookCard(props) {
               <br />
             </Card.Text>
           </div>
-          <Button variant="primary">Add somewhere</Button>
+          <Button variant="primary" onClick={() => handleAdd(book, "fav", lists["fav"], dispatches["fav"])}>Add to favorites</Button>
+          <Button variant="primary" onClick={() => handleAdd(book, "todo", lists["todo"], dispatches["todo"])}>Add to planned reading</Button>
+          <Button variant="primary" onClick={() => handleAdd(book, "fin", lists["fin"], dispatches["fin"])}>Add to finished books</Button>
         </Card.Body>
       </div>
     </Card>

@@ -1,6 +1,9 @@
 import Button from "react-bootstrap/Button";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import { useLoaderData } from "react-router-dom";
+import { useContext } from 'react';
+import { ListContext, ListDispatchContext } from "../listContexts";
+import { handleAdd } from "../listFunctions";
 
 /* const description = `Originally published from 1954 through 1956, J.R.R. Tolkien's richly complex series ushered in a new age of epic adventure storytelling. A philologist and illustrator who took inspiration from his work, Tolkien invented the modern heroic quest novel from the ground up, creating not just a world, but a domain, not just a lexicon, but a language, that would spawn countless imitators and lead to the inception of the epic fantasy genre. Today, THE LORD OF THE RINGS is considered "the most influential fantasy novel ever written." (THE ENCYCLOPEDIA OF FANTASY)
 During his travels across Middle-earth, the hobbit Bilbo Baggins had found the Ring. But the simple band of gold was far from ordinary; it was in fact the One Ring - the greatest of the ancient Rings of Power. Sauron, the Dark Lord, had infused it with his own evil magic, and when it was lost, he was forced to flee into hiding.
@@ -12,6 +15,8 @@ Fate has placed the burden in the hands of Frodo Baggins, Bilbo's heir...and he 
 
 function BookView() {
     const book = useLoaderData();
+    const lists = useContext(ListContext);
+    const dispatches = useContext(ListDispatchContext);
     //console.log(book);
 
     return (
@@ -32,7 +37,9 @@ function BookView() {
                             {/* ersättes med hantering av klick */}
                             <ButtonGroup size="sm">
                                 <Button variant="secondary">Subscribe to updates{/* förmodligen en idé att göra som egen komponent å den utnyttjas i authorview samt bookview */}</Button>
-                                <Button variant="secondary">Add to list{/* förmodligen en idé att göra som egen komponent å den utnyttjas i authorview samt bookview */}</Button>
+                                <Button variant="secondary" onClick={() => handleAdd(book, "fav", lists["fav"], dispatches["fav"])}>Add to favorites</Button>
+                                <Button variant="secondary" onClick={() => handleAdd(book, "todo", lists["todo"], dispatches["todo"])}>Add to planned reading</Button>
+                                <Button variant="secondary" onClick={() => handleAdd(book, "fin", lists["fin"], dispatches["fin"])}>Add to finished books</Button>
                             </ButtonGroup>
                         </div>
 
