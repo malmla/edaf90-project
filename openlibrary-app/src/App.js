@@ -10,11 +10,24 @@ export const ListDispatchContext = createContext(null);
 function App() {
 
   const listsStore = JSON.parse(window.localStorage.getItem("lists"));
-/*   const initialLists = [{"name": "favoriter1", "list_items":["abc", "dfe", "blabla", "herkules"], "description": "några favorittermer för temporära listor"},
-  {"name": "pingviiner", "list_items":["poirot", "köttbulle", "falukorv"], "description": "några saker som definitivt inte är pingiviner"}, 
-  {"name": "lunch", "list_items": ["fiskpinne", "potatis"], "description": "vad jag åt till lunch idag"}]; */
-  const [lists, dispatch] = useReducer(listReducer, listsStore || []);
-  
+  const testInit = [{
+    "name": "Redwall", "description": "Redwall böckerna", "list_items":
+      [{ "key": "/works/OL465952W", "title": "Redwall (Redwall #1)" },
+      { "key": "/works/OL25141865W", "title": "Mariel of Redwall (Redwall #4)" },
+      { "key": "/works/OL465980W", "title": "Taggerung (Redwall #14)" },
+      { "key": "/works/OL465915W", "title": "Marlfox (Redwall #11)" },
+      { "key": "/authors/OL27229A", "title": "Brian Jacques" }]
+  },
+  {
+    "name": "Lord of the rings", "description": "Lord of the rings list", "list_items":
+      [{ "key": "/works/OL27448W", "title": "The Lord of the Rings" },
+      { "key": "/works/OL27479W", "title": "The Two Towers" },
+      { "key": "/works/OL27516W", "title": "The Return of the King" },
+      { "key": "/authors/OL26320A", "title": "J.R.R. Tolkien" }]
+  }];
+
+  const [lists, dispatch] = useReducer(listReducer, listsStore || testInit);
+
   return (
     <div className="App">
       <ListContext.Provider value={lists}>
