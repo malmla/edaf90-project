@@ -1,0 +1,2 @@
+- data är inte enhetligt alltid (description.value vs description för beskrivning av ett verk)
+  - svårt att täcka alla fall när man ska läsa av

@@ -1,13 +1,56 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import App from './App';
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import BookView from './item-view/BookView';
+import AuthorView from './item-view/AuthorView';
+import SearchPage from './components/SearchPage';
+import ListPage from './components/ListPage';
+import { fetchBookEdition, fetchAuthor } from './dataClasses';
+
+const router = createBrowserRouter([
+  {
+    element: <App />,
+    path: "/",
+    children: [
+      {
+        index: true,
+        element: <BookView />,
+        path: 'book/:olid',
+        loader: ({ params }) => {
+          return fetchBookEdition(params.olid);
+        }
+      },
+      {
+        element: <AuthorView />,
+        path: 'authors/:olid',
+        loader: ({ params }) => {
+          return fetchAuthor(params.olid);
+        }
+      },
+      {
+        element: <ListPage />,
+        path: 'my-lists'
+      },
+      {
+        element: <SearchPage />,
+        path: 'search/:text',
+      },
+    ],
+  },
+  {
+    path: "*",
+    element: <h2>Sidan du letar efter kan ej hittas.</h2>
+  }
+])
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <RouterProvider router={router}/>
   </React.StrictMode>
 );
 
