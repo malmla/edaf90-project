@@ -5,9 +5,9 @@ import Card from "react-bootstrap/Card"
 import Stack from "react-bootstrap/Stack";
 import { useState } from "react";
 
-const lists = [{"name": "favoriter1", "list_items":["abc", "dfe", "blabla", "herkules"]},
- {"name": "pingviiner", "list_items":["poirot", "köttbulle", "falukorv"]}, 
- {"name": "lunch", "list_items": ["fiskpinne", "potatis"]}];
+const lists = [{"name": "favoriter1", "list_items":["abc", "dfe", "blabla", "herkules"], "description": "några favorittermer för temporära listor"},
+ {"name": "pingviiner", "list_items":["poirot", "köttbulle", "falukorv"], "description": "några saker som definitivt inte är pingiviner"}, 
+ {"name": "lunch", "list_items": ["fiskpinne", "potatis"], "description": "vad jag åt till lunch idag"}];
 
 
 function ListView() {
@@ -33,8 +33,8 @@ function ListView() {
       </div>
       <div className="list-container p-2">
         <Card className="list-card">
-          <Card.Title className="list-card-title me-auto">List name</Card.Title>
-          <Card.Body className="list-description">List description that should be somewhat long i guess but not too long because the main thing is the list</Card.Body>
+          <Card.Title className="list-card-title me-auto">{lists[index].name}</Card.Title>
+          <Card.Body className="list-description">{lists[index].description}</Card.Body>
           <ListGroup variant="flush">
             {/* for the chosen list (index in usestate) generate listitems for all items */
               lists[index].list_items.map(item => {
