@@ -2,12 +2,14 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import { Link, useNavigate } from 'react-router-dom';
 import './styles.css';
+import ListModal from '../ListModal';
 
 
 function BookCard(props) {
   const { book } = props;
   const authors = [];
   const navigate = useNavigate();
+
   for (let index = 0; index < book.authors.length; index++) {
     const author_name = book.authors[index];
     const author_key = book.authors_key[index];
@@ -41,7 +43,7 @@ function BookCard(props) {
               <br />
             </Card.Text>
           </div>
-          <Button variant="primary">Add somewhere</Button>
+          <ListModal objKey={book.key} title={book.title}/>
         </Card.Body>
       </div>
     </Card>

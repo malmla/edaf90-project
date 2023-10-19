@@ -1,12 +1,11 @@
 import Button from "react-bootstrap/Button";
-import ButtonGroup from "react-bootstrap/ButtonGroup";
 import {useLoaderData, useNavigate} from "react-router-dom";
+import ListModal from "../components/ListModal";
 
 // const book = Book.dummybook();
 
 function BookView() {
     const book = useLoaderData();
-    const navigate = useNavigate();
     //console.log(book);
     return (
         <>
@@ -23,11 +22,7 @@ function BookView() {
 
                     <div className="col px-3 border-start">
                         <div className="border-bottom m-1 pb-2">
-                            {/* ersättes med hantering av klick */}
-                            <ButtonGroup size="sm">
-                                <Button variant="secondary">Subscribe to updates{/* förmodligen en idé att göra som egen komponent å den utnyttjas i authorview samt bookview */}</Button>
-                                <Button variant="secondary">Add to list{/* förmodligen en idé att göra som egen komponent å den utnyttjas i authorview samt bookview */}</Button>
-                            </ButtonGroup>
+                            <ListModal objKey={book.key} title={book.title} />    
                         </div>
 
                         <div className="border-bottom m-1 pb-2">

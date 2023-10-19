@@ -20,7 +20,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <ListView />
+        element: <ListView />,
       },
       {
         element: <BookView />,

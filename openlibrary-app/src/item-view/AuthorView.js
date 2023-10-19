@@ -1,6 +1,4 @@
-import { useLoaderData } from "react-router-dom";
-import Button from 'react-bootstrap/Button';
-import ButtonGroup from 'react-bootstrap/ButtonGroup';
+import { Link, useLoaderData } from "react-router-dom";
 import Carousel from 'react-bootstrap/Carousel';
 import CarouselItem from "react-bootstrap/esm/CarouselItem";
 import Image from 'react-bootstrap/Image';
@@ -13,6 +11,7 @@ import { useNavigation } from "react-router-dom";
 //import Pagination from 'react-bootstrap/Pagination';
 //import { useState } from "react";
 import './styles.css'
+import ListModal from "../components/ListModal";
 
 function AuthorView () {
     const author = useLoaderData();
@@ -32,10 +31,7 @@ function AuthorView () {
                 <h2>{author.name}</h2>
             </div>
             <div className="row m-auto py-3 justify-content-around btn-row">
-                <ButtonGroup size="sm">
-                    <Button variant="secondary">Subscribe to updates {/* förmodligen en idé att göra som egen komponent å den utnyttjas i authorview samt bookview */}</Button>
-                    <Button variant="secondary">Add to list {/* förmodligen en idé att göra som egen komponent å den utnyttjas i authorview samt bookview */}</Button>
-                </ButtonGroup>
+                <ListModal objKey={author.key} title={author.name}/>
             </div>
             <div className="row-cols-2 row">
                 <div className="col col-5 mx-auto">
@@ -55,14 +51,16 @@ function AuthorView () {
                                     {
                                         author.works.map(work => {
                                             return (
-                                                <ListGroup.Item key={"link-to-"+ work.key} action href={work.key}>
+                                                <Link to={work.key}>
+                                                <ListGroup.Item key={"link-to-"+ work.key} action>
                                                     <Stack direction="horizontal">
                                                         <div>
                                                             <Image src={getCoverThumb(work.covers)} />
                                                         </div>
                                                         <div className="ms-auto">{work.title}</div>
                                                     </Stack>
-                                                </ListGroup.Item>)
+                                                </ListGroup.Item>
+                                                </Link>)
                                         })
                                     }
                                     </ListGroup>

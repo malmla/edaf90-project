@@ -76,6 +76,7 @@ async function fetchBookEdition(OLID) {
     book.publish_date = edition.publish_date ? edition.publish_date : "Unknown publish year";
     book.covers = edition.covers ? edition.covers : "No cover found";
     book.work_key = edition.works[0].key;
+    book.key = ("/books/" + OLID);
 
     let work = await safeFetchJson('https://openlibrary.org' + edition.works[0].key + '.json');
 
@@ -96,21 +97,17 @@ async function fetchBookEdition(OLID) {
     return book;
 }
 
-export class Author {
-
-}
-
 async function fetchAuthor(OLID) {
-    let author = new Author();
 
     let remoteAuthor = await safeFetchJson('https://openlibrary.org/authors/' + OLID +'.json');
-
+    let author = {};
     author.bio = remoteAuthor.bio ? remoteAuthor.bio : "No bio found";
     author.birth_date = remoteAuthor.birth_date ? remoteAuthor.birth_date : "Field missing";
     author.death_date = remoteAuthor.death_date ? remoteAuthor.death_date : "Field missing";
     author.name = remoteAuthor.name ? remoteAuthor.name : "Name missing";
     author.fuller_name = remoteAuthor.fuller_name ? remoteAuthor.fuller_name : "Field missing";
     author.photos = remoteAuthor.photos ? remoteAuthor.photos : "Field missing";
+    author.key = ("/authors/" + OLID);
 
     let authorWorks = await fetchAuthorWorks("https://openlibrary.org/authors/" + OLID + "/works.json");
     author.works = authorWorks;

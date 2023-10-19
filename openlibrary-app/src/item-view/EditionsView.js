@@ -1,8 +1,6 @@
 import {Link, useLoaderData, useParams} from "react-router-dom";
 import BookCard from "../components/BookCard";
 import {Container, Row, Table} from 'react-bootstrap';
-import Button from "react-bootstrap/Button";
-import ButtonGroup from "react-bootstrap/ButtonGroup";
 
 
 
