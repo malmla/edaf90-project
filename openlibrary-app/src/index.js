@@ -8,8 +8,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import BookView from './item-view/BookView';
 import AuthorView from './item-view/AuthorView';
 import SearchPage from './components/SearchPage';
-import ListPage from './components/ListPage';
-import {fetchBookEdition, fetchAuthor, fetchEditions} from './dataClasses';
+import { fetchBookEdition, fetchAuthor, fetchEditions } from './dataClasses';
 import EditionsView from "./item-view/EditionsView";
 import ListView from './item-view/ListView';
 
@@ -37,10 +36,6 @@ const router = createBrowserRouter([
         }
       },
       {
-        element: <ListPage />,
-        path: 'my-lists'
-      },
-      {
         element: <SearchPage />,
         path: 'search/:text',
       },
@@ -62,7 +57,7 @@ const router = createBrowserRouter([
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router}/>
+    <RouterProvider router={router} />
   </React.StrictMode>
 );
 

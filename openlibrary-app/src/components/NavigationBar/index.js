@@ -13,9 +13,6 @@ function NavigationBar() {
         </Nav.Link>
         <SearchBar />
       </div>
-      <Nav.Link href="/my-lists" className="pe-5 text-light" >
-        My lists
-      </Nav.Link>
     </Navbar>
   );
 }
