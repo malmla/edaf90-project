@@ -1,11 +1,12 @@
 import Button from "react-bootstrap/Button";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
-import { useLoaderData } from "react-router-dom";
+import {useLoaderData, useNavigate} from "react-router-dom";
 
 // const book = Book.dummybook();
 
 function BookView() {
     const book = useLoaderData();
+    const navigate = useNavigate();
     //console.log(book);
     return (
         <>
@@ -44,7 +45,7 @@ function BookView() {
                             <b>Publish date:</b> {book.publish_date} <br/>
                             <b>Publisher:</b> {book.publishers[0]} <br/>
                             {/* länk till works/olid */}
-                            <Button variant="secondary" size="sm">See other editions</Button>
+                            <Button href={book.work_key} variant="secondary" size="sm">See other editions</Button>
                             
                         </div>
 

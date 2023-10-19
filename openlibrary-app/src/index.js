@@ -9,7 +9,8 @@ import BookView from './item-view/BookView';
 import AuthorView from './item-view/AuthorView';
 import SearchPage from './components/SearchPage';
 import ListPage from './components/ListPage';
-import { fetchBookEdition, fetchAuthor } from './dataClasses';
+import {fetchBookEdition, fetchAuthor, fetchEditions} from './dataClasses';
+import EditionsView from "./item-view/EditionsView";
 
 const router = createBrowserRouter([
   {
@@ -38,6 +39,13 @@ const router = createBrowserRouter([
       {
         element: <SearchPage />,
         path: 'search/:text',
+      },
+      {
+        element: <EditionsView />,
+        path: 'works/:key',
+        loader: ({ params }) => {
+          return fetchEditions(params.key);
+        }
       },
     ],
   },

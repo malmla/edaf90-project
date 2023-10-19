@@ -32,19 +32,22 @@ export class Book {
     }
 }
 
-async function fetchEditions(editions) {
+async function fetchEditions(work) { //work is a string containing work id, fetch editions with /work/:id/editions.json
+    let editions = await safeFetchJson("https://openlibrary.org/works/" + work + "/editions.json?limit=1000")
     let fetched = [];
-    await Promise.all(editions.map(async e => {
-        let b = await safeFetchJson("http://openlibrary.org/books/" + e + ".json");
+    editions.entries.forEach(b => {
         let book = new Book();
+        book.key = b.key ? b.key : "No key";
         book.title = b.title ? b.title : "Unknown Title";
+        book.authors = ["Unknown Author"];
+        book.authors_key = b.authors ? b.authors[0] : ["Unknown Author"];
         book.publish_year = b.publish_date ? b.publish_date : "Unknown publish year";
-        book.publisher = b.publishers ? b.publishers : "No publisher found";
-        book.coverLink = b.covers ? b.covers[0] : null;
-        book.id = e;
-        book.editions = b.edition_key;
+        book.coverLink = b.covers ? "https://covers.openlibrary.org/b/id/" + b.covers[0] + "-L.jpg" : "No cover found";
+        book.id = b.key;
+        book.publishers = b.publishers ? b.publishers : "Unknown publisher";
         fetched.push(book);
-    }));
+    })
+
     return fetched;
 }
 
@@ -70,6 +73,7 @@ async function fetchBookEdition(OLID) {
     book.publishers = edition.publishers ? edition.publishers : "Unknown Publisher";
     book.publish_date = edition.publish_date ? edition.publish_date : "Unknown publish year";
     book.covers = edition.covers ? edition.covers : "No cover found";
+    book.work_key = edition.works[0].key;
 
     let work = await safeFetchJson('https://openlibrary.org' + edition.works[0].key + '.json');
 
