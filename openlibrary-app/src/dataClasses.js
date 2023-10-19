@@ -47,8 +47,10 @@ async function fetchEditions(work) { //work is a string containing work id, fetc
         book.publishers = b.publishers ? b.publishers : "Unknown publisher";
         fetched.push(book);
     })
+    let w = await safeFetchJson('https://openlibrary.org' + editions.entries[0].works[0].key + '.json');
+    let result = {editions: fetched, work: w.description}
 
-    return fetched;
+    return result;
 }
 
 function getbook(b) {
