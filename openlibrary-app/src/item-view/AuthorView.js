@@ -20,7 +20,7 @@ function AuthorView () {
     //const [worksPage, setWorksPage] = useState(1);
     return (
         <div>
-            {
+            {   //todo: flytta ut i en useEffect och ladda works däri
                 navigation.state === "loading" ?
                 <Spinner animation="border" role="status" className="mt-1">
                     <span className="visually-hidden">Loading...</span>

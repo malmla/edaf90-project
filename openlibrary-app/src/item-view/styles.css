@@ -17,3 +17,27 @@
 .btn-row {
     width: 40vw;
 }
+
+.list-card-title {
+    padding: 1rem;
+    text-decoration: underline;
+}
+
+.list-container {
+    height: 70vh;
+    width: 70vw;
+}
+
+.list-list {
+    align-self: flex-start;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.list-item {
+    text-align: start;
+}
+
+.list-description {
+    text-align: start;
+}

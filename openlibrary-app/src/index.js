@@ -11,6 +11,7 @@ import SearchPage from './components/SearchPage';
 import ListPage from './components/ListPage';
 import {fetchBookEdition, fetchAuthor, fetchEditions} from './dataClasses';
 import EditionsView from "./item-view/EditionsView";
+import ListView from './item-view/ListView';
 
 const router = createBrowserRouter([
   {
@@ -19,6 +20,9 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
+        element: <ListView />
+      },
+      {
         element: <BookView />,
         path: 'books/:olid',
         loader: ({ params }) => {
