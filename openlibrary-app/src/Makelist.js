@@ -4,14 +4,12 @@ import Button from 'react-bootstrap/Button';
 
 
 function Makelist({list, setList, title}){
-
     let temp = [...list];
     if(list.length === 0){
         temp = [{"Title":"Title", "Author": "Author", "Year": "Year", "Publisher":"Publisher"}]
     }
 
     const handleRemoval = (e, row) => {
-        console.log(list);
         if(list.length>1){
             setList(list => {
                 return list.filter(book => book.Title !== row.Title)
