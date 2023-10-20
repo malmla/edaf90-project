@@ -6,8 +6,6 @@ import ListModal from "../components/ListModal";
 
 function BookView() {
     const book = useLoaderData();
-    const lists = useContext(ListContext);
-    const dispatches = useContext(ListDispatchContext);
     //console.log(book);
     return (
         <>
