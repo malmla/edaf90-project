@@ -1,5 +1,4 @@
-import {Link, useLoaderData, useParams} from "react-router-dom";
-import BookCard from "../components/BookCard";
+import { Link, useLoaderData } from "react-router-dom";
 import {Container, Row, Table} from 'react-bootstrap';
 
 

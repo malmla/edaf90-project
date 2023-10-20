@@ -26,7 +26,7 @@ export class Book {
         let searchres = await safeFetchJson("https://openlibrary.org/search.json?q=" + string.replaceAll(" ", "+"));
         let res = [];
         await Promise.all(searchres.docs.map(b => {
-            res.push(getbook(b))
+            return res.push(getbook(b))
         }));
         return res;
     }
