@@ -1,35 +1,45 @@
 import './App.css';
 import NavigationBar from './components/NavigationBar';
 import { Outlet } from "react-router-dom";
+import { createContext, useReducer } from 'react';
+import listReducer from './listReducer';
 
-import { useReducer } from 'react';
-import listReducer from './listReducer.js';
-import { ListContext, ListDispatchContext } from './listContexts';
+export const ListContext = createContext(null);
+export const ListDispatchContext = createContext(null);
 
 function App() {
 
-  /*const temp = [
-    {"Title":"Dune", "Author": "Frank Herbert", "Year": 1965, "Publisher":"Chilton Books"},
-    {"Title":"Metro 2033", "Author": "Dmitry Glukhovsky", "Year": 2002, "Publisher":"Eksmo"},
-    {"Title":"The Big Short", "Author": "Michael Lewis", "Year": 2010, "Publisher":"W. W. Norton & Company"}
-  ];*/
+  const listsStore = JSON.parse(window.localStorage.getItem("lists"));
+  const testInit = [{
+    "name": "Redwall", "description": "Redwall böckerna", "list_items":
+      [{ "key": "/works/OL465952W", "title": "Redwall (Redwall #1)" },
+      { "key": "/works/OL25141865W", "title": "Mariel of Redwall (Redwall #4)" },
+      { "key": "/works/OL465980W", "title": "Taggerung (Redwall #14)" },
+      { "key": "/works/OL465915W", "title": "Marlfox (Redwall #11)" },
+      { "key": "/authors/OL27229A", "title": "Brian Jacques" }]
+  },
+  {
+    "name": "Lord of the rings", "description": "Lord of the rings list", "list_items":
+      [{ "key": "/works/OL27448W", "title": "The Lord of the Rings" },
+      { "key": "/works/OL27479W", "title": "The Two Towers" },
+      { "key": "/works/OL27516W", "title": "The Return of the King" },
+      { "key": "/authors/OL26320A", "title": "J.R.R. Tolkien" }]
+  }];
 
-  const favStore = JSON.parse(window.localStorage.getItem("fav"));
-  const todoStore = JSON.parse(window.localStorage.getItem("todo"));
-  const finStore = JSON.parse(window.localStorage.getItem("fin"));
+  const [lists, dispatch] = useReducer(listReducer, listsStore || testInit);
 
-  const [fav, favDispatch] = useReducer(listReducer, favStore || []);
-  const [todo, todoDispatch] = useReducer(listReducer, todoStore || []);
-  const [fin, finDispatch] = useReducer(listReducer, finStore || []);
   return (
-    <ListContext.Provider value={{"fav":fav, "todo":todo, "fin":fin}}>
-      <ListDispatchContext.Provider value={{"fav":favDispatch, "todo":todoDispatch, "fin":finDispatch}}>
-        <div className="App">
+    <div className="App">
+      <ListContext.Provider value={lists}>
+        <ListDispatchContext.Provider value={dispatch}>
           <NavigationBar />
           <Outlet />
-        </div>
-      </ListDispatchContext.Provider>
-    </ListContext.Provider>
+        </ListDispatchContext.Provider>
+      </ListContext.Provider>
+      <footer className='my-5'>
+        UIcons by <a href="https://www.flaticon.com/uicons">Flaticon</a>
+      </footer>
+    </div>
   );
 }
 

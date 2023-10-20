@@ -25,34 +25,48 @@ export class Book {
     static async search(string) {
         let searchres = await safeFetchJson("https://openlibrary.org/search.json?q=" + string.replaceAll(" ", "+"));
         let res = [];
-        await Promise.all(searchres.docs.map(async b => {
-            let temp = null;
-            try {
-                if(b.key) {
-                    temp = await safeFetchJson("http://openlibrary.org" + b.key + ".json")
-                }
-            }catch (e) {
-            }
-            res.push(getbook(b, temp))
+        await Promise.all(searchres.docs.map(b => {
+            return res.push(getbook(b))
         }));
         return res;
     }
 }
 
-function getbook(b, work) {
+async function fetchEditions(work) { //work is a string containing work id, fetch editions with /work/:id/editions.json
+    let editions = await safeFetchJson("https://openlibrary.org/works/" + work + "/editions.json?limit=1000")
+    let fetched = [];
+    editions.entries.forEach(b => {
+        let book = new Book();
+        book.key = b.key ? b.key : "No key";
+        book.title = b.title ? b.title : "Unknown Title";
+        book.authors = ["Unknown Author"];
+        book.authors_key = b.authors ? b.authors[0] : ["Unknown Author"];
+        book.publish_year = b.publish_date ? b.publish_date : "Unknown publish year";
+        book.coverLink = b.covers ? "https://covers.openlibrary.org/b/id/" + b.covers[0] + "-L.jpg" : "No cover found";
+        book.id = b.key;
+        book.publishers = b.publishers ? b.publishers : "Unknown publisher";
+        fetched.push(book);
+    })
+    let w = await safeFetchJson('https://openlibrary.org' + editions.entries[0].works[0].key + '.json');
+    let result = {editions: fetched, work: w.description}
+
+    return result;
+}
+
+function getbook(b) {
     let book = new Book();
+    book.key = b.key ? b.key : "No key";
     book.title = b.title ? b.title : "Unknown Title";
     book.authors = b.author_name ? b.author_name : ["Unknown Author"];
+    book.authors_key = b.author_key ? b.author_key : ["Unknown Author"];
     book.publish_year = b.first_publish_year ? b.first_publish_year : "Unknown publish year";
-    book.publisher = "TODO"
-    book.description = work && work.description ? work.description.value : "No description found";
     book.coverLink = b.cover_i ? "https://covers.openlibrary.org/b/id/" + b.cover_i + "-L.jpg" : "No cover found";
+    book.id = b.cover_edition_key;
+    book.editions = b.edition_key;
+    
     return book;
 }
 
-/*
-    hämtar ENDAST första författaren
-*/
 async function fetchBookEdition(OLID) {
     let book = new Book();
     let edition = await safeFetchJson('https://openlibrary.org/books/' + OLID + '.json');
@@ -61,42 +75,58 @@ async function fetchBookEdition(OLID) {
     book.publishers = edition.publishers ? edition.publishers : "Unknown Publisher";
     book.publish_date = edition.publish_date ? edition.publish_date : "Unknown publish year";
     book.covers = edition.covers ? edition.covers : "No cover found";
+    book.work_key = edition.works[0].key;
+    book.key = ("/books/" + OLID);
 
     let work = await safeFetchJson('https://openlibrary.org' + edition.works[0].key + '.json');
 
     book.description = work.description ? work.description : "No description found"; //behöver ta hänsyn till olika format w.desc... w.desc..n.value
 
-    if (work.description.value) {
+    if (work.description && work.description.value) {
         book.description = work.description.value
     }
 
-    let author = await safeFetchJson('https://openlibrary.org' + work.authors[0].author.key + '.json');
-
-    book.author_name = author.name ? author.name : "Name not found";
-    book.author_key = author.key ? author.key : "Link not found";
+    book.authors = [];
+    let authors = [];
+    work.authors.map(entry => {
+        return authors.push(safeFetchJson('https://openlibrary.org' + entry.author.key + '.json'));
+    })
+    await Promise.all(authors)
+    .then(e => e.map(author => {return book.authors.push(author)}));
 
     return book;
 }
 
-export class Author {
-
-}
-
 async function fetchAuthor(OLID) {
-    let author = new Author();
 
     let remoteAuthor = await safeFetchJson('https://openlibrary.org/authors/' + OLID +'.json');
-
+    let author = {};
     author.bio = remoteAuthor.bio ? remoteAuthor.bio : "No bio found";
     author.birth_date = remoteAuthor.birth_date ? remoteAuthor.birth_date : "Field missing";
     author.death_date = remoteAuthor.death_date ? remoteAuthor.death_date : "Field missing";
     author.name = remoteAuthor.name ? remoteAuthor.name : "Name missing";
     author.fuller_name = remoteAuthor.fuller_name ? remoteAuthor.fuller_name : "Field missing";
     author.photos = remoteAuthor.photos ? remoteAuthor.photos : "Field missing";
+    author.key = ("/authors/" + OLID);
 
-    console.log(author);
+    let authorWorks = await fetchAuthorWorks("https://openlibrary.org/authors/" + OLID + "/works.json");
+    author.works = authorWorks;
 
     return author;
+}
+
+/** 
+* Hämtar alla works av en författare
+*/
+async function fetchAuthorWorks(url) {
+    let temp = await safeFetchJson(url);
+    let worksPromise = await safeFetchJson(url + "?limit=" + temp.size);
+
+    let works = [];
+    worksPromise.entries.map(entry => {
+        return works.push({"title": entry.title, "key": entry.key, "covers": entry.covers ? entry.covers : "No cover"});
+    })
+    return works;
 }
 
 function safeFetchJson(url) {
@@ -109,4 +139,4 @@ function safeFetchJson(url) {
         });
 }
 
-export {fetchBookEdition, fetchAuthor};
+export {fetchBookEdition, fetchAuthor, fetchEditions};

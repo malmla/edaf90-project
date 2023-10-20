@@ -1,2 +1,6 @@
 - data är inte enhetligt alltid (description.value vs description för beskrivning av ett verk)
-  - svårt att täcka alla fall när man ska läsa av
+  - svårt att veta att man täcker alla fall när man ska läsa av
+- bra om vi haft typ en data library för vår egen sida, lättare med terminologi etc då
+- inte alltid api:t tillåter det man förväntar sig
+  - recent changes api:t verkar inte tillåta att sökning på specifika sidor
+    - gör det svårt med prenumerationstjänsten

@@ -1,0 +1,43 @@
+.works-results {
+    overflow: scroll;
+    height: 40vh;
+}
+
+.author-photo-frame {
+    height: 50vh;
+}
+
+.author-photo {
+    height: 45vh;
+    object-fit: cover;
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+}
+
+.btn-row {
+    width: 40vw;
+}
+
+.list-card-title {
+    padding: 1rem;
+    text-decoration: underline;
+}
+
+.list-container {
+    height: 70vh;
+    width: 70vw;
+}
+
+.list-list {
+    align-self: flex-start;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.list-item {
+    text-align: start;
+}
+
+.list-description {
+    text-align: start;
+}

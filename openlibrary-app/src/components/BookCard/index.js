@@ -1,21 +1,23 @@
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
+import { Link, useNavigate } from 'react-router-dom';
 import './styles.css';
-import { useNavigate } from 'react-router-dom';
-import { useContext } from 'react';
-import { ListContext, ListDispatchContext } from '../../listContexts.js';
-import { handleAdd } from '../../listFunctions';
+import ListModal from '../ListModal';
 
 
 function BookCard(props) {
   const { book } = props;
-  const url = 'https://example.com';
+  const authors = [];
+  const navigate = useNavigate();
 
-  const lists = useContext(ListContext);
-  const dispatches = useContext(ListDispatchContext);
+  for (let index = 0; index < book.authors.length; index++) {
+    const author_name = book.authors[index];
+    const author_key = book.authors_key[index];
+    authors.push({"name": author_name, "key": author_key});
+  }
 
   const onClick = () => {
-    console.log("Clicked book: ", book.title);
+    navigate("/books/" + book.id);
   }
 
   return (
@@ -27,17 +29,21 @@ function BookCard(props) {
         <Card.Body className="d-flex flex-column justify-content-between">
           <div>
             <Card.Title>
-              <a href={url}>{book.title}</a>
+              <Link to={"/books/" + book.id}>{book.title}</Link>
             </Card.Title>
-            <Card.Text className="text-left">
-              <b>Author:</b> {book.authors}<br />
+            <Card.Text className="text-left"> {/* gör dynamiskt antal länkar */}
+              <b>Authors:</b>
+              {
+                authors.map(author => {
+                  return (<Button href={'/authors/' + author.key} variant='link'>{author.name}</Button>)
+                })
+                
+              } <br/>
               <b>Published:</b> {book.publish_year}<br />
               <br />
             </Card.Text>
           </div>
-          <Button variant="primary" onClick={() => handleAdd(book, "fav", lists["fav"], dispatches["fav"])}>Add to favorites</Button>
-          <Button variant="primary" onClick={() => handleAdd(book, "todo", lists["todo"], dispatches["todo"])}>Add to planned reading</Button>
-          <Button variant="primary" onClick={() => handleAdd(book, "fin", lists["fin"], dispatches["fin"])}>Add to finished books</Button>
+          <ListModal objKey={book.key} title={book.title}/>
         </Card.Body>
       </div>
     </Card>
