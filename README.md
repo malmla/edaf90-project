@@ -5,16 +5,17 @@ The project is to make a web application that utilises the [API](https://openlib
 The project will utilise pre-built react gui-components from https://react-bootstrap.netlify.app in accordance with the [instructions](/project.pdf) for the project.
 
 TODO:
-- landing page: se items man prenumererar på som har uppdateringar, visa de listor som finns
-- subscribe-knapp-komponent och add-to-list-komponent? samma behaviour i authorview som i bookview? 
-    - lägg till i lista, ta bort från lista, prenumerera: det här kan förmodligen vara context-reducer
-- worksview (/works/:olid)
-- sökning: (söka efter författare, lägre prio)
-- progressive web app (lägre prio):
-- localstorage? listor och prenumerationslistan
-- You must use a global state: context and reducer for react, a service for angular. (Krav i projekt) Förmodligen mest lämpligt att använda listor till det eller?
 - skriv rapporten, skapade ett [dokument](/report-notes.txt) att samla antecknigar inför rapporten
+- leta buggar
+    - en i editionsview med data.work [länk](resources/editions-error.png).
 
+scrapped:
+- prenumeration
+- progressive web app
+- söka efter författare (typ AuthorCard i sökres)
+- viss listhantering (ändra beskrivning, ta bort item ur lista)
+
+Report at (https://docs.google.com/document/d/1mXyrAL2M5wXludIyut5wjiAZPF_B-HMbsUoVlOju88w/).
 
 Time report done through a [Google Form](https://forms.gle/6WqwcB5QayWox6Qw8).
 Results in [Google Sheets](https://docs.google.com/spreadsheets/d/1Ku0Buc6SBuxS5if3rjAR84lodWiAHW5GiwE0yiSYRoQ/edit?usp=sharing).
