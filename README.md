@@ -7,7 +7,6 @@ The project will utilise pre-built react gui-components from https://react-boots
 TODO:
 - skriv rapporten, skapade ett [dokument](/report-notes.txt) att samla antecknigar inför rapporten
 - leta buggar
-    - en i editionsview med data.work [länk](resources/editions-error.png).
 
 scrapped:
 - prenumeration

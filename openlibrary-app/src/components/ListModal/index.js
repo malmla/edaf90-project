@@ -8,7 +8,7 @@ import { ListContext, ListDispatchContext } from '../../App';
 
 function ListModal(props) {
   const [show, setShow] = useState(false);
-  const [inList, setInList] = useState([]);
+  //const [inList, setInList] = useState([]);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);

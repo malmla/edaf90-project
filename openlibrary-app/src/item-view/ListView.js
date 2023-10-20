@@ -31,14 +31,15 @@ function ListView() {
   return (<div>
     <Stack className="container" direction="horizontal">
       <div className="list-list p-2">
-        <ListGroup variant="flush">
+        <ListGroup>
           {
             //for each list, make a listgroup.item, usestate with index to choose which list to render
             lists.map(list => {
               return (
                 <ListGroup.Item className="list-item"
                   onClick={e => setIndex(lists.indexOf(list))}
-                  key={list.name}>
+                  key={list.name}
+                  active={index === lists.indexOf(list)}>
                   {list.name}
                 </ListGroup.Item>
               )
