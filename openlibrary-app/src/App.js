@@ -11,7 +11,7 @@ function App() {
 
   const listsStore = JSON.parse(window.localStorage.getItem("lists"));
   const testInit = [{
-    "name": "Redwall", "description": "Redwall böckerna", "list_items":
+    "name": "Testlista", "description": "Detta är en testlista. för att se att listvyn renderas korrekt. Innehåller böcker från serien Redwall.", "list_items":
       [{ "key": "/works/OL465952W", "title": "Redwall (Redwall #1)" },
       { "key": "/works/OL25141865W", "title": "Mariel of Redwall (Redwall #4)" },
       { "key": "/works/OL465980W", "title": "Taggerung (Redwall #14)" },
@@ -19,7 +19,7 @@ function App() {
       { "key": "/authors/OL27229A", "title": "Brian Jacques" }]
   },
   {
-    "name": "Lord of the rings", "description": "Lord of the rings list", "list_items":
+    "name": "Lord of the rings", "description": "Detta är en testlista. för att se att listvyn renderas korrekt. Innehåller böcker från Sagan om ringen.", "list_items":
       [{ "key": "/works/OL27448W", "title": "The Lord of the Rings" },
       { "key": "/works/OL27479W", "title": "The Two Towers" },
       { "key": "/works/OL27516W", "title": "The Return of the King" },

@@ -8,11 +8,6 @@ import { ListContext, ListDispatchContext } from '../App.js';
 import MakeListModal from "../components/MakeListModal/index.js";
 import { Link } from "react-router-dom";
 
-/* const lists = [{"name": "favoriter1", "list_items":["abc", "dfe", "blabla", "herkules"], "description": "några favorittermer för temporära listor"},
- {"name": "pingviiner", "list_items":["poirot", "köttbulle", "falukorv"], "description": "några saker som definitivt inte är pingiviner"}, 
- {"name": "lunch", "list_items": ["fiskpinne", "potatis"], "description": "vad jag åt till lunch idag"}];
- */
-
 // {name, list_items[key, title], description}
 
 function ListView() {
