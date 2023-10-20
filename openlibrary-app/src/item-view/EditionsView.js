@@ -7,7 +7,7 @@ import {Container, Row, Table} from 'react-bootstrap';
 function EditionsView(){
     const data = useLoaderData();
     const editions = data.editions;
-    const desc = data.work.value;
+    const desc = data.work ? data.work.value : "No description found";
     return (
         <div>
             <Container>
@@ -35,20 +35,6 @@ function EditionsView(){
                 </Table>
                 </Row>
             </Container>
-        </div>
-    )
-}
-
-function BookItems(props) {
-    const { books } = props;
-
-    const Books = books.map((book, index) => (
-        <BookCard book={book} key={"book" + index} />
-    ));
-
-    return (
-        <div className="book-grid">
-            {Books}
         </div>
     )
 }
