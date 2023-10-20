@@ -13,7 +13,7 @@ export default function listReducer(lists, action) {
 
 
             });
-            console.log([...lists])
+            //console.log([...lists])
             window.localStorage.setItem("lists", JSON.stringify(lists));
             return [...lists];
         }
@@ -28,7 +28,7 @@ export default function listReducer(lists, action) {
                 }
                 window.localStorage.setItem("lists", JSON.stringify(lists));
             });
-            console.log([...lists])
+            //console.log([...lists])
             window.localStorage.setItem("lists", JSON.stringify(lists));
             return [...lists];
         }

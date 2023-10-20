@@ -19,7 +19,6 @@ function MakeListModal(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(title, desc);
     handleMakeList(title, desc);
     setTitle("");
     setDesc("");
